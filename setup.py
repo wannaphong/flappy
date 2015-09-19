@@ -5,7 +5,11 @@ from setuptools import setup, Command, Extension
 from setuptools.command.install import install
 from distutils.util import get_platform
 from distutils.dist import Distribution
-
+try:
+   from distutils.command.build_py import build_py_2to3 \
+        as build_py
+except ImportError:
+   from distutils.command.build_py import build_py
 import subprocess
 import glob
 import sys
@@ -96,6 +100,8 @@ setup(  name='Flappy',
         ],
         package_data={'flappy' : ['*.so', '*.pyd','*.dll']},
         classifiers=[
+            'Programming Language :: Python :: 2',
+            'Programming Language :: Python :: 3',
             'Development Status :: 3 - Alpha',
             'Intended Audience :: Developers',
             'License :: OSI Approved :: MIT License',
